@@ -5,5 +5,24 @@ const getAllProducts = async (req, res) => {
     const products = await Product.find({});
 
     res.json(products);
-  } catch (error) {}
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+const getAllProductById = async (req, res) => {
+  try {
+    const product = await Product.findById(req.params.id);
+
+    res.json(product);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ message: "Server Error" });
+  }
+};
+
+module.exports = {
+  getAllProducts,
+  getAllProductById,
 };
